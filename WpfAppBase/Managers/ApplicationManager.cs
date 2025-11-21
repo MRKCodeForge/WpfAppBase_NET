@@ -11,12 +11,15 @@ namespace WpfAppBase.Managers
 		public static ApplicationManager Instance => _lazyInstance.Value;
 
 		public IServiceProvider ServiceProvider { get; }
+		public IExampleManager ExampleManager { get; }
 
 		private ApplicationManager()
 		{
 			ServiceProvider = new ServiceCollection()
 				.AddSingleton<IExampleManager, ExampleManager>()
 				.BuildServiceProvider();
+
+			ExampleManager = ServiceProvider.GetRequiredService<ExampleManager>();
 		}
 	}
 }
